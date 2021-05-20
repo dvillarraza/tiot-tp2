@@ -1,0 +1,17 @@
+{
+  "name": "lista-tdd",
+  "version": "1.0.0",
+  "description": "Implementacion de una lista de claves:valor TDD en javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec",
+    "coverage": "nyc --reporter=html mocha"
+  },
+  "author": "Diego Villarraza",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.4.0",
+    "nyc": "^15.1.0"
+  }
+}
