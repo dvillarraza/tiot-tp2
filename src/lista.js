@@ -34,43 +34,51 @@ module.exports = class Lista {
         return NaN;
     }
 
-    //Agrega un elemento en la lista, en caso de que la clave ya exista actualiza el valor 
+    //Agrega un elemento en la lista,
+    //verifica que la clave sea del tipo string 
+    //en caso de que la clave ya exista actualiza el valor 
     //dado que no puede haber dos claves repetidas
     add(clave, valor){
 
-        var indice = this.#existe(clave);
-        if (indice >= 0){
-            this.#elmentos[indice].valor = valor;
+        if(typeof clave == 'string'){        
+            var indice = this.#existe(clave);
+            if (indice >= 0){
+                this.#elmentos[indice].valor = valor;
+            }
+            else{
+                this.#elmentos.push({clave,valor});
+            }
+            return true;
         }
-        else{
-            this.#elmentos.push({clave,valor});
-        }
+        return false;
     }
 
     //Elimina un elemento con la clave pasada como parametro
+    //si la clave no existe devuelve false
     delete(clave){ 
         var indice = this.#existe(clave);
         if (indice >= 0){
             this.#elmentos.splice(indice,1);
+            return true;
         }
+        return false;
     }
 
-    //Devuelve los elemetnos de la lista tal como se ingresaron
-    elementos(){
-
-        return this.#elmentos;
-    }
-
-    //Devuelve los elemetnos de la lista ordenados por clave, la mayor clave primero
-    elementosOrdenados(){
+    //Devuelve las claves de la lista ordenados, alfabeticamente de manera ascendete de la A a la Z
+    clavesOrdenadas(){
+        var claves = [];
         //En el metodo sort() se pasa como parametro una funcion de comparacion para ordenar or clave
         var listaordenada = this.#elmentos.sort(function(a, b){ 
-            if (a.clave > b.clave) {
-                return -1; //Se ordena de mayor a menor
+            if (a.clave < b.clave) {
+                return -1; //Se ordena alfabeticamente de manera ascendete de la A a la Z
             }
         });
 
-        return listaordenada;
+        for(var i=0; i < listaordenada.length; i++) {
+            claves[i] = listaordenada[i].clave;
+        }
+
+        return claves;
     }
 
 };
